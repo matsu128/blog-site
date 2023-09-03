@@ -1,0 +1,61 @@
+/* Header.css */
+
+/* 既存のスタイル */
+
+.header {
+    background-color: #333;
+    padding: 20px;
+    color: #fff;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  
+  .navbar-title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .navbar-menu {
+    list-style: none;
+    display: flex;
+  }
+  
+  .navbar-item {
+    margin-right: 15px;
+  }
+  
+  .navbar-item a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+  }
+  
+  .navbar-item a:hover {
+    background-color: #555;
+  }
+  
+  /* 追加されたスタイル */
+  /* 画面がスクロールされた場合でも常に上部の20%に固定されるスタイル */
+  .header.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
