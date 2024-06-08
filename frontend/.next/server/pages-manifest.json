@@ -2,5 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/api/submitName": "pages/api/submitName.js"
+  "/api/LoginForm": "pages/api/LoginForm.js"
 }
