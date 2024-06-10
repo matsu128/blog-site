@@ -1,0 +1,33 @@
+/* Project1コンポーネントのスタイル */
+
+/* 画面全体に背景画像を表示するスタイル */
+.project1-container {
+    /* background-image: url('./Project1_background.jpg'); */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* ヘッダーのスタイル */
+  .project1-header {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  /* プロジェクトの詳細情報のスタイル */
+  .project1-details {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: justify;
+  }
+  
