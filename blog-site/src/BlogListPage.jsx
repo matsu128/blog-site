@@ -1,4 +1,4 @@
-// src/pages/BlogListPage.jsx
+// src/BlogListPage.jsx
 import React from 'react';
 
 const BlogListPage = () => {
