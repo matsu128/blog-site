@@ -30,12 +30,12 @@ const LoginPage = () => {
       <h1>Login Page</h1>
       <form onSubmit={handleSubmit}>
         <input
-          type="password"
-          placeholder="Password"
+          type='password'
+          placeholder='Password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
+        <button type='submit'>Login</button>
       </form>
       {error && <p>{error}</p>}
     </div>
