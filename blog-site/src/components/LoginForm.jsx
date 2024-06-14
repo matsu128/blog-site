@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 import TextInput from './TextInput';
@@ -37,9 +37,17 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <TextInput value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
-      <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-      <Button type="submit">Login</Button>
+      <TextInput
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder='Name'
+      />
+      <PasswordInput
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder='Password'
+      />
+      <Button type='submit'>Login</Button>
       {/*
       <Link to="/forgot-password">Forgot Password?</Link>
       */}

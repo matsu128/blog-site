@@ -1,14 +1,12 @@
 import React from 'react';
-import SignInForm from './components/SignInForm';
-import Link from './components/Link';
+import SigninPage from '@/SignInPage';
 
-const SignInPage = () => {
+const SigninPage = () => {
   return (
-    <div>
-      <SignInForm />
-      <Link href="/">Sign Up</Link>
-    </div>
+    <>
+      <SigninPage />
+    </>
   );
 };
 
-export default SignInPage;
+export default SigninPage;
