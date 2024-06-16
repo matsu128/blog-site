@@ -1,60 +1,66 @@
 # blog-site
 
-## 概要
-このプロジェクトは、Next.js バージョン 14 で構築されたブログサイトです。`pages/api` にバックエンドの処理が、`src` ディレクトリに React を使用したフロントエンドの処理が作成されています。
+## Overview
+This project is a blog site built with Next.js version 14. Backend processes are created in `pages/api`, and frontend processes are created in the `src` directory using React.
 
-## 目次
-- [インストール方法](#インストール方法)
-- [使い方](#使い方)
-- [ライセンス](#ライセンス)
-- [著作権表示](#著作権表示)
-- [コンタクト情報](#コンタクト情報)
-- [依存関係をインストールする](#依存関係をインストールする)
+## Table of Contents
+- [Installation](#installation)
+- [Install Dependencies](#install-dependencies)
+- [Usage](#usage)
+- [License](#license)
+- [Copyright](#copyright)
+- [Contact Information](#contact-information)
 
-## インストール方法
-- **リポジトリをクローンする**:
+## Installation
+- **Clone the repository**:
    ```bash
    git clone https://github.com/yourusername/blog-site.git
    cd blog-site
 
-## 使い方:
-以下はアプリケーションの使い方の基本的な説明です。
+## Usage
+The following is a basic explanation of how to use the application.
 
-### ログイン画面
-アプリケーションにログインするための画面です。
-- **サインインリンク**: サインインページに移動します。
-- **パスワードを忘れた場合**: 名前とメールアドレスが自動入力された状態でサインインページに移動します。
+### Login Screen
+The screen for logging into the application.
 
-### サインインページ
-ユーザーがアプリケーションにサインインするページです。
-- **ログイン成功**: ブログ一覧画面に移動します。
+- **Sign-in Link**: Navigates to the Sign-in page.
+- **Forgot Password**: Navigates to the Sign-in page with the name and email address pre-filled.
 
-### ブログ一覧画面
-ユーザーがブログ記事のリストを閲覧できるメイン画面です。
-- **編集**: 既存の投稿を編集するためにブログ記事作成画面に移動します。
-- **新規追加**: 新しい投稿を作成するためにブログ記事作成画面に移動します。
-- **記事選択**: 選択された記事の詳細ページに移動します。
+### Sign-in Page
+The page where users can sign in to the application.
 
-### 詳細ページ
-選択されたブログ記事の詳細を表示する画面です。
-- **戻る**: ブログ一覧画面に戻ります。
-- **編集**: 現在の投稿を編集するためにブログ記事作成画面に移動します。
-- **削除**: 投稿を削除し、ブログ一覧画面に戻ります。
+- **Login Success**: Navigates to the Blog List screen.
 
-### ブログ記事作成画面
-ブログ記事を作成または編集する画面です。
-- **保存/キャンセル**: ブログ一覧画面に戻ります。
-- **削除**: 投稿を削除し、ブログ一覧画面に戻ります。
+### Blog List Screen
+The main screen where users can view a list of blog posts.
 
-## ライセンス:
-このプロジェクトはMITライセンスの下でライセンスされています。詳細は `LICENSE` ファイルを参照してください。
+- **Edit**: Navigates to the Blog Post Creation screen to edit an existing post.
+- **Add New**: Navigates to the Blog Post Creation screen to create a new post.
+- **Select Article**: Navigates to the Detail Page of the selected article.
 
-## 著作権表示:
-© 2024 blog-site プロジェクト開発者
+### Detail Page
+The screen that shows the details of a selected blog post.
 
-## コンタクト情報:
-質問やサポートが必要な場合は、`your.email@example.com` までご連絡ください。
+- **Back**: Navigates back to the Blog List screen.
+- **Edit**: Navigates to the Blog Post Creation screen to edit the current post.
+- **Delete**: Deletes the post and navigates back to the Blog List screen.
 
-## 依存関係をインストールする
+### Blog Post Creation Screen
+The screen for creating or editing a blog post.
+
+- **Save/Cancel**: Navigates back to the Blog List screen.
+- **Delete**: Deletes the post and navigates back to the Blog List screen.
+
+## License
+This project is licensed under the MIT License. For details, please refer to the `LICENSE` file.
+
+## Copyright
+© 2024 blog-site project developers
+
+## Contact Information
+For questions or support, please contact `your.email@example.com`.
+
+## Install Dependencies
 ```bash
 npm install
+
