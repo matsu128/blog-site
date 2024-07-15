@@ -1,0 +1,131 @@
+・Userテーブルの作成コマンド
+CREATE TABLE "User" (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    password VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
+    userid INTEGER
+);
+
+・Postテーブルの作成コマンド
+CREATE TABLE "Post" (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255),
+    content TEXT,
+    imageurl VARCHAR(255),
+    createdat TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    userid INTEGER,
+    CONSTRAINT "Post_userid_fkey" FOREIGN KEY (userid) REFERENCES "User"(id)
+);
+ちょっと変更
+
+・Userテーブルのinsert
+INSERT INTO "User" (name, password, email, userid) VALUES
+('John Doe', 'hashed_password', 'john.doe@example.com', 1),
+('2人目', 'hashed_password', 'soumatsumoto1282002@icloud.com', 2);
+
+・Post tableのinsert
+INSERT INTO "Post" (title, content, imageurl, userid) VALUES
+('First Post', 'This is the content of the first post.', 'https://example.com/image.jpg', 1),
+('First Post', 'This is the content of the first post.', 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg', 2);
+
+
+
+-- BlogListPage.jsx
+
+import React, { useState } from 'react';
+import ArticleItem from './ArticleItem';
+import Pagination from './Pagination';
+import ControlPanel from './ControlPanel';
+
+const BlogListPage = () => {
+  const [articles, setArticles] = useState([]);
+  const [showAll, setShowAll] = useState(false);
+  const [selectedArticles, setSelectedArticles] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const articlesPerPage = 4;
+
+  return (
+    <div>
+      <ControlPanel
+        showAll={showAll}
+        setShowAll={setShowAll}
+        selectedArticles={selectedArticles}
+        setSelectedArticles={setSelectedArticles}
+        articles={articles}
+        setArticles={setArticles}
+      />
+      <div className="grid grid-cols-1 gap-4">
+        {articles
+          .slice((currentPage - 1) * articlesPerPage, currentPage * articlesPerPage)
+          .map((article) => (
+            <ArticleItem
+              key={article.id}
+              article={article}
+              selectedArticles={selectedArticles}
+              setSelectedArticles={setSelectedArticles}
+            />
+          ))}
+      </div>
+      <Pagination
+        totalArticles={articles.length}
+        articlesPerPage={articlesPerPage}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
+    </div>
+  );
+};
+
+export default BlogListPage;
+
+
+
+-- ControlPanel.jsx
+import React from 'react';
+
+const ControlPanel = ({ showAll, setShowAll, selectedArticles, setSelectedArticles, articles, setArticles }) => {
+  const toggleShowAll = () => {
+    setShowAll(!showAll);
+    fetchArticles(!showAll);
+  };
+
+  const handleDelete = () => {
+    setArticles(articles.filter(article => !selectedArticles.includes(article.id)));
+    setSelectedArticles([]);
+  };
+
+  const fetchArticles = (showAll) => {
+    const dummyData = [
+      { id: 1, imageUrl: 'https://via.placeholder.com/150', title: 'Article 1', content: 'This is a sample content of article 1' },
+      { id: 2, imageUrl: 'https://via.placeholder.com/150', title: 'Article 2', content: 'This is a sample content of article 2' },
+      { id: 3, imageUrl: 'https://via.placeholder.com/150', title: 'Article 3', content: 'This is a sample content of article 3' },
+      { id: 4, imageUrl: 'https://via.placeholder.com/150', title: 'Article 4', content: 'This is a sample content of article 4' },
+      { id: 5, imageUrl: 'https://via.placeholder.com/150', title: 'Article 5', content: 'This is a sample content of article 5' },
+      { id: 6, imageUrl: 'https://via.placeholder.com/150', title: 'Article 6', content: 'This is a sample content of article 6' },
+    ];
+    setArticles(showAll ? dummyData : dummyData.filter(article => article.id % 2 === 0));
+  };
+
+  return (
+    <section class="text-gray-600 body-font">
+  <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+    <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
+      <img class="object-cover object-center rounded" alt="hero" src="https://dummyimage.com/720x600"/>
+        </div>
+    </div>
+    <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
+      <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Before they sold out
+        <br class="hidden lg:inline-block"/>readymade gluten
+      </h1>
+      <p class="mb-8 leading-relaxed">Copper mug try-hard pitchfork pour-over freegan heirloom neutra air plant cold-pressed tacos poke beard tote bag. Heirloom echo park mlkshk tote bag selvage hot chicken authentic tumeric truffaut hexagon try-hard chambray.</p>
+      <div class="flex justify-center">
+        <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
+        <button class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Button</button>
+      </div>
+    </div>
+</section>
+  );
+};
+
+export default ControlPanel;

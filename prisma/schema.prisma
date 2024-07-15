@@ -1,0 +1,27 @@
+// /prisma/schema.prisma
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  password  String   // ハッシュ化された形式で保存することを想定
+  email     String   @unique
+  posts     Post[]  // 1対多の関連: 1人のユーザーが複数の記事を持つことができる
+}
+
+model Post {
+  id          Int       @id @default(autoincrement())
+  title       String
+  content     String
+  imageUrl    String?   // 画像のURL（オプション）
+  createdAt   DateTime  @default(now())  // 投稿日時
+  userId      Int       // ブログ記事の著者を示すユーザーID
+  author      User      @relation(fields: [userId], references: [id])
+}
