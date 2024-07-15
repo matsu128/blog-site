@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import Image from 'next/image';
 import Button from '@/components/Button';
 import GoogleIcon from '@mui/icons-material/Google';
@@ -14,7 +13,7 @@ const LoginPage = () => {
   const loginSubmitHandler = async (e) => {
     e.preventDefault();
 
-    // 入力のサニタイズ
+    // Sanitize inputs
     const sanitizedEmail = email.trim();
     const sanitizedPassword = password.trim();
 
@@ -29,11 +28,13 @@ const LoginPage = () => {
 
       if (response.ok) {
         const result = await response.json();
-        // トークンをsessionStorageに保存
+        // Save token in sessionStorage
         sessionStorage.setItem('token', result.token);
 
-        // 次の画面に遷移
+        // Navigate to the next screen
         router.push('/');
+      } else if (response.status === 401) {
+        setError('Email address or password is incorrect.');
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Login failed');
@@ -54,17 +55,25 @@ const LoginPage = () => {
           <div className='flex justify-center'>
             <Image
               src='/logo.jpg'
-              alt='Description of image'
+              alt='Logo'
               width={200}
               height={200}
             />
           </div>
           <h2 className='mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900'>
-            Login in to your account
+            Login to your account
           </h2>
         </div>
 
         <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
+          {/* Error banner */}
+          {error && (
+            <div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative' role='alert'>
+              <strong className='font-bold'>Error!</strong>
+              <span className='block sm:inline'> {error}</span>
+            </div>
+          )}
+
           <form onSubmit={loginSubmitHandler}>
             <div className='mb-3'>
               <label
@@ -79,7 +88,7 @@ const LoginPage = () => {
                   type='email'
                   autoComplete='email'
                   required
-                  className='block w-full p-1.5 rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 placeholder:italic placeholder:text-slate-400'
+                  className='block w-full p-1.5 rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 placeholder:italic placeholder:text-gray-400'
                   placeholder='myblog@example.com'
                   onChange={(e) => setEmail(e.target.value)}
                 />

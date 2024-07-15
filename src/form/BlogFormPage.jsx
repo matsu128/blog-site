@@ -25,6 +25,7 @@ const BlogFormPage = () => {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      // Retrieve stored data from sessionStorage on initial load
       const storedTitle = sessionStorage.getItem('title');
       const storedContent = sessionStorage.getItem('content');
       const storedImage = sessionStorage.getItem('image');
@@ -51,7 +52,7 @@ const BlogFormPage = () => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       if (file.size > 2 * 1024 * 1024) {
-        setImageError('画像サイズは2MB以下にしてください');
+        setImageError('Image size should be less than 2MB');
         return;
       }
       const img = new Image();
@@ -67,6 +68,7 @@ const BlogFormPage = () => {
   };
 
   const handleImageDelete = () => {
+    // Clear image state and sessionStorage
     setImage(null);
     setImageSize({ width: 0, height: 0 });
     setFile(null);
@@ -74,6 +76,7 @@ const BlogFormPage = () => {
   };
 
   const handleTitleChange = (e) => {
+    // Sanitize and update title state
     const sanitizedTitle = sanitizeHtml(e.target.value, {
       allowedTags: [],
       allowedAttributes: {},
@@ -88,7 +91,7 @@ const BlogFormPage = () => {
       }
     } else {
       setTitleError(true);
-      setErrorMessage('タイトルは50文字以内で入力してください。');
+      setErrorMessage('Title should be within 50 characters.');
     }
   };
 
@@ -98,6 +101,7 @@ const BlogFormPage = () => {
   };
 
   const handleContentChange = (e) => {
+    // Sanitize and update content state
     const sanitizedContent = sanitizeHtml(e.target.value, {
       allowedTags: [],
       allowedAttributes: {},
@@ -118,27 +122,28 @@ const BlogFormPage = () => {
 
   const handleSubmit = async () => {
     try {
+      // Validate form fields
       if (!title.trim() || !content.trim()) {
         setTitleError(!title.trim());
         setContentError(!content.trim());
-        setErrorMessage('タイトルと内容を両方入力してください。');
+        setErrorMessage('Please enter both title and content.');
         return;
       }
 
+      // Decode token to get userId
       const userId = (jwt.decode(sessionStorage.getItem('token'))).id;
       const postId = sessionStorage.getItem('postId');
       const isUpdate = !!postId;
 
       let imageUrl = sessionStorage.getItem('image');
-      console.log('front form fileの前パス file = ',file)     
       if (file) {
-        console.log('front form file = true')
+        // Upload image to Firebase Storage if a new file is selected
         const storageRef = ref(storage, `images/${file.name}`);
         await uploadBytes(storageRef, file);
         imageUrl = await getDownloadURL(storageRef);
       }
-      console.log('imageURL = ', imageUrl)
 
+      // Prepare request data
       const requestData = {
         title,
         content,
@@ -149,6 +154,7 @@ const BlogFormPage = () => {
         requestData.postId = postId;
       }
 
+      // Send POST or PUT request to API endpoint
       const response = await fetch(`/api/blogform/`, {
         method: isUpdate ? 'PUT' : 'POST',
         headers: {
@@ -163,6 +169,7 @@ const BlogFormPage = () => {
         console.error('Failed to save post');
       }
 
+      // Clear sessionStorage after submission
       sessionStorage.removeItem('title');
       sessionStorage.removeItem('content');
       sessionStorage.removeItem('image');
@@ -205,7 +212,7 @@ const BlogFormPage = () => {
                 onChange={handleImageUpload}
               />
               <span className="absolute text-gray-400">
-                画像をドラッグ＆ドロップまたはクリックして追加
+                Drag & drop or click to add an image
               </span>
             </>
           )}
@@ -219,7 +226,7 @@ const BlogFormPage = () => {
             value={title}
             onChange={handleTitleChange}
             onBlur={handleTitleBlur}
-            placeholder="タイトルを入力"
+            placeholder="Enter title"
             className={`w-full h-12 border p-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300 text-black ${
               titleError ? 'border-red-500' : ''
             }`}
@@ -231,7 +238,7 @@ const BlogFormPage = () => {
             value={content}
             onChange={handleContentChange}
             onBlur={handleContentBlur}
-            placeholder="テキストを入力"
+            placeholder="Enter text"
             className={`w-full h-40 border p-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300 text-black ${
               contentError ? 'border-red-500' : ''
             }`}

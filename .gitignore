@@ -43,5 +43,3 @@ next-env.d.ts
 .DS_Store
 
 .Trash/
-
-/node_modules/

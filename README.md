@@ -1,85 +1,40 @@
-# blog-site
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Table of Contents
+## Getting Started
 
-- [Skill](#skill)
-- [Installation](#installation)
-- [Install Dependencies](#install-dependencies)
-- [Usage](#usage)
-- [Copyright](#copyright)
-
-## Skill
-
-Frontend & Backend
-<br>
-![React](https://skillicons.dev/icons?i=react)
-![NextJs](https://skillicons.dev/icons?i=next)
-![Tailwind](https://skillicons.dev/icons?i=tailwind)
-![Mui](https://skillicons.dev/icons?i=mui)
-
-Database
-<br>
-![DB](https://skillicons.dev/icons?i=postgres)
-
-## Overview
-
-This project is a blog site built with Next.js version 14. Backend processes are created in `pages/api`, and frontend processes are created in the `src` directory using React.
-
-## Installation
-
-- **Clone the repository**:
-  ```bash
-  git clone https://github.com/yourusername/blog-site.git
-  cd blog-site
-  ```
-
-## Usage
-
-The following is a basic explanation of how to use the application.
-
-### Login Page
-
-The screen for logging into the application.
-
-- **Sign-in Link**: Navigates to the Sign-in page.
-- **Forgot Password**: Navigates to the Sign-in page with the name and email address pre-filled.
-
-### Sign-in Page
-
-The page where users can sign in to the application.
-
-- **Login Success**: Navigates to the Blog List screen.
-
-### Blog List Page
-
-The main screen where users can view a list of blog posts.
-
-- **Edit**: Navigates to the Blog Post Creation screen to edit an existing post.
-- **Add New**: Navigates to the Blog Post Creation screen to create a new post.
-- **Select Article**: Navigates to the Detail Page of the selected article.
-
-### Detail Page
-
-The screen that shows the details of a selected blog post.
-
-- **Back**: Navigates back to the Blog List screen.
-- **Edit**: Navigates to the Blog Post Creation screen to edit the current post.
-- **Delete**: Deletes the post and navigates back to the Blog List screen.
-
-### Blog Post Page
-
-The screen for creating or editing a blog post.
-
-- **Save/Cancel**: Navigates back to the Blog List screen.
-- **Delete**: Deletes the post and navigates back to the Blog List screen.
-
-## Copyright
-
-© 2024 blog-site project developers
-
-## Install Dependencies
+First, run the development server:
 
 ```bash
-npm install
-
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

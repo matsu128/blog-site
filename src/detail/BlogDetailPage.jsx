@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import Button from '../components/Button';
 import Image from 'next/image';
 import Footer from '../components/Footer';
-import { storage } from '../../firebase'; // Firebase の設定から storage をインポート
+import { storage } from '../../firebase';
 import { ref, deleteObject } from 'firebase/storage';
 
 const BlogDetailPage = () => {
@@ -16,7 +16,7 @@ const BlogDetailPage = () => {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const router = useRouter();
 
-  // セッションストレージから投稿データを取得し、ステートに設定
+  // Fetch post data from session storage and set state
   useEffect(() => {
     const imageUrl = sessionStorage.getItem('image');
     const selectedTitle = sessionStorage.getItem('title');
@@ -31,38 +31,38 @@ const BlogDetailPage = () => {
     setCreatedAt(selectedCreatedAt);
   }, []);
 
-  // 編集ページへの遷移
+  // Navigate to edit page
   const handleEdit = () => {
     router.push('/blogform');
   };
 
-  // ホームページへの遷移
+  // Navigate back to home page
   const handleBack = () => {
     router.push('/');
   };
 
-  // Firebase Storageから画像を削除する関数
+  // Function to delete image from Firebase Storage
   const deleteImageFromFirebase = async () => {
     try {
-      // セッションストレージから画像のURLを取得
+      // Get image URL from session storage
       const imageUrl = sessionStorage.getItem('image');
       if (!imageUrl) {
         console.error('Image URL not found in session storage');
         return;
       }
 
-      // Firebase Storage内のパスを設定
+      // Set path in Firebase Storage
       const storageRef = ref(storage, imageUrl);
-      // 画像を削除
+      // Delete the image
       await deleteObject(storageRef);
-      // 画像の削除後、投稿を削除
+      // After deleting the image, proceed to delete the post
       handleDelete();
     } catch (error) {
       console.error('Error deleting image from Firebase Storage:', error);
     }
   };
 
-  // 投稿の削除
+  // Function to delete the post
   const handleDelete = async () => {
     const postId = sessionStorage.getItem('postId');
     if (postId) {
@@ -86,18 +86,18 @@ const BlogDetailPage = () => {
     }
   };
 
-  // 削除確認ダイアログの表示
+  // Show delete confirmation dialog
   const handleDeleteClick = () => {
     setShowConfirmDialog(true);
   };
 
-  // 削除の確認
+  // Confirm deletion
   const handleConfirmDelete = () => {
     setShowConfirmDialog(false);
-    deleteImageFromFirebase(); // Firebase Storageから画像を削除する関数を呼び出す
+    deleteImageFromFirebase(); // Call function to delete image from Firebase Storage
   };
 
-  // 削除のキャンセル
+  // Cancel deletion
   const handleCancelDelete = () => {
     setShowConfirmDialog(false);
   };
@@ -107,7 +107,7 @@ const BlogDetailPage = () => {
       <Header />
       <div className="min-h-screen flex flex-col items-center py-20 px-6 relative">
 
-        {/* 削除確認ダイアログ */}
+        {/* Delete confirmation dialog */}
         {showConfirmDialog && (
           <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-md backdrop-brightness-50">
             <div className="p-10 rounded-2xl shadow-2xl text-center transform transition-all duration-200">
@@ -126,34 +126,34 @@ const BlogDetailPage = () => {
           </div>
         )}
 
-        {/* 投稿日時表示エリア */}
+        {/* Display creation date */}
         <div className={`w-full flex justify-end pr-4 mb-4 text-sm ${showConfirmDialog ? 'blur-sm' : ''}`}>
           <p>{new Date(createdAt).toLocaleString()}</p>
         </div>
 
         <div className={`w-full max-w-screen-xl mx-auto ${showConfirmDialog ? 'blur-sm' : ''}`}>
-          {/* 画像 */}
+          {/* Image */}
           <div className="w-full h-96 rounded-lg overflow-hidden relative">
             {image && (
               <Image src={image} alt="Uploaded" layout="fill" objectFit="cover" />
             )}
           </div>
 
-          {/* タイトル */}
+          {/* Title */}
           <div className="flex justify-center mt-6">
             <h1 className="text-2xl font-bold text-center break-words" style={{ width: '80%' }}>
               {title}
             </h1>
           </div>
 
-          {/* コンテンツ */}
+          {/* Content */}
           <div className="flex flex-col items-center justify-center mt-4">
             <p className="text-base text-center break-words" style={{ width: '80%' }}>
               {content}
             </p>
           </div>
 
-          {/* ボタンエリア */}
+          {/* Button area */}
           <div className={`flex justify-center mt-6 ${viewMode === 'myself' ? 'space-x-10' : ''}`}>
             <div onClick={handleBack}>
               <Button text="Back" />

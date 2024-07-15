@@ -8,10 +8,10 @@ const SigninPage = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [error, setError] = useState(null); // エラーメッセージを保持するステート
-  const [message, setMessage] = useState(''); // 成功メッセージを保持するステート
+  const [error, setError] = useState(null); // State to hold error messages
+  const [message, setMessage] = useState(''); // State to hold success message
 
-  // フォーム送信時の処理
+  // Form submission handler
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -27,22 +27,22 @@ const SigninPage = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        // レスポンスが正常でない場合、400ステータスの特定エラーメッセージを設定
+        // Set specific error message for 400 status
         if (response.status === 400) {
-          setError('User already exists with this email.'); // 特定のエラーメッセージを設定
+          setError('User already exists with this email.');
         } else {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        setMessage(''); // 前の成功メッセージをクリア
+        setMessage(''); // Clear previous success message
       } else {
-        setMessage(data.message); // 成功メッセージをステートに設定
-        setError(null); // 前のエラーをクリア
-        router.push('/login'); // ログインページにリダイレクト
+        setMessage(data.message); // Set success message to state
+        setError(null); // Clear previous error
+        router.push('/login'); // Redirect to login page
       }
     } catch (error) {
       console.error('Error signing up:', error);
-      setError('Failed to sign up. Please try again.'); // 一般的なエラーメッセージをステートに設定
-      setMessage(''); // 前の成功メッセージをクリア
+      setError('Failed to sign up. Please try again.'); // Set general error message to state
+      setMessage(''); // Clear previous success message
     }
   };
 
@@ -62,7 +62,7 @@ const SigninPage = () => {
         </div>
 
         <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
-          {/* エラーメッセージの表示 */}
+          {/* Display error message */}
           {error && (
             <div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative' role='alert'>
               <strong className='font-bold'>Error!</strong>
@@ -70,7 +70,7 @@ const SigninPage = () => {
             </div>
           )}
 
-          {/* 成功メッセージの表示 */}
+          {/* Display success message */}
           {message && (
             <div className='bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative' role='alert'>
               <strong className='font-bold'>Success!</strong>
@@ -91,7 +91,7 @@ const SigninPage = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
-                  className='block w-full p-1.5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 placeholder:italic placeholder:text-slate-400'
+                  className='block w-full p-1.5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 placeholder:italic placeholder:text-gray-400'
                   placeholder='Your name'
                 />
               </div>
@@ -108,7 +108,7 @@ const SigninPage = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className='block w-full p-1.5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 placeholder:italic placeholder:text-slate-400'
+                  className='block w-full p-1.5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 placeholder:italic placeholder:text-gray-400'
                   placeholder='myblog@example.com'
                 />
               </div>
@@ -125,7 +125,7 @@ const SigninPage = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className='block w-full p-1.5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 placeholder:italic placeholder:text-slate-400'
+                  className='block w-full p-1.5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 placeholder:italic placeholder:text-gray-400'
                   placeholder='Your password'
                 />
               </div>

@@ -4,10 +4,10 @@ const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { viewMode, userId } = req.body; // req.bodyからviewModeとuserIdを抽出
+    const { viewMode, userId } = req.body; // Extract viewMode and userId from req.body
     try {
       let posts;
-      if (viewMode === 'myself' && userId) { // viewModeが'myself'かつuserIdが存在する場合
+      if (viewMode === 'myself' && userId) { // If viewMode is 'myself' and userId is provided
         posts = await prisma.post.findMany({
           where: { userId: userId },
           orderBy: { id: 'asc' },
@@ -20,7 +20,6 @@ export default async function handler(req, res) {
           }
         });
       } else if (viewMode === 'everyone') {
-        console.log('back listのeveryoneパス')
         posts = await prisma.post.findMany({
           orderBy: { id: 'asc' },
           select: {
@@ -32,7 +31,7 @@ export default async function handler(req, res) {
           }
         });
       } else {
-        posts = []; // 適切なviewModeが提供されなかった場合、空の配列を返す
+        posts = []; // If no valid viewMode is provided, return an empty array
       }
       res.status(200).json({ posts });
     } catch (error) {
@@ -42,6 +41,6 @@ export default async function handler(req, res) {
       await prisma.$disconnect();
     }
   } else {
-    res.status(405).end();
+    res.status(405).end(); // Respond with Method Not Allowed for non-POST requests
   }
 }

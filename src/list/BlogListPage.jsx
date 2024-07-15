@@ -8,7 +8,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import Footer from '../components/Footer';
 import jwt from 'jsonwebtoken';
-import { storage } from '../../firebase'; // Firebase の設定から storage をインポート
+import { storage } from '../../firebase'; // Import storage from Firebase configuration
 import { ref, getDownloadURL } from 'firebase/storage';
 
 const BlogListPage = () => {
@@ -35,7 +35,7 @@ const BlogListPage = () => {
   
       const data = await response.json();
       if (data.posts) {
-        // 画像のダウンロード URL を取得して記事データをセット
+        // Get download URLs for images and set article data
         const postsWithImageURLs = await Promise.all(
           data.posts.map(async (post) => {
             if (post.imageUrl) {
@@ -72,7 +72,7 @@ const BlogListPage = () => {
   const getFirebaseImageURL = async (imagePath) => {
     try {
       const storageRef = ref(storage, imagePath);
-      const downloadURL = await getDownloadURL(storageRef); // 正しいメソッドを使用する
+      const downloadURL = await getDownloadURL(storageRef); // Use correct method
 
       return downloadURL;
     } catch (error) {
