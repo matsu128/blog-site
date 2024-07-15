@@ -1,13 +1,14 @@
 import BlogListPage from '../src/list/BlogListPage';
-import { getStaticPaths } from 'next';
-
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
     <>
-      <div>
-        <BlogListPage />
-      </div>
+      <Header />
+      <title>Share Your Best Moments | BlogSite</title>
+      <BlogListPage />
+      <Footer />
     </>
   );
 }
