@@ -5,10 +5,8 @@ import ArticleContainer from './ArticleContainer';
 
 const BlogListPage = () => {
   return (
-    <div className="bg-gray-100 md:bg-white min-h-screen relative">
-      <Header />
+    <div className='bg-gray-100 md:bg-white min-h-screen relative'>
       <ArticleContainer />
-      <Footer />
     </div>
   );
 };

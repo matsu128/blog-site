@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Button from '@/components/Button';
-import GoogleIcon from '@mui/icons-material/Google';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -23,7 +22,10 @@ const LoginPage = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email: sanitizedEmail, password: sanitizedPassword }),
+        body: JSON.stringify({
+          email: sanitizedEmail,
+          password: sanitizedPassword,
+        }),
       });
 
       if (response.ok) {
@@ -53,12 +55,7 @@ const LoginPage = () => {
       <div className='flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8'>
         <div className='sm:mx-auto sm:w-full sm:max-w-sm'>
           <div className='flex justify-center'>
-            <Image
-              src='/logo.jpg'
-              alt='Logo'
-              width={200}
-              height={200}
-            />
+            <Image src='/logo.jpg' alt='Logo' width={200} height={200} />
           </div>
           <h2 className='mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900'>
             Login to your account
@@ -68,7 +65,9 @@ const LoginPage = () => {
         <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
           {/* Error banner */}
           {error && (
-            <div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative' role='alert'>
+            <div
+              className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative'
+              role='alert'>
               <strong className='font-bold'>Error!</strong>
               <span className='block sm:inline'> {error}</span>
             </div>
@@ -79,7 +78,7 @@ const LoginPage = () => {
               <label
                 htmlFor='email'
                 className='block text-sm font-medium leading-6 text-gray-900'>
-                Email address
+                Email
               </label>
               <div className='mt-2'>
                 <input
@@ -123,12 +122,6 @@ const LoginPage = () => {
             </div>
             <Button text={'Login'} />
           </form>
-
-          <button className='w-full mt-2 rounded-md bg-red-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 relative'>
-            <GoogleIcon className='absolute left-3' />
-            Login with Google
-          </button>
-
           <p className='mt-10 text-center text-sm text-black'>
             Not a member?{' '}
             <button

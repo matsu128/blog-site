@@ -103,12 +103,18 @@ const ArticleContainer = () => {
 
   const indexOfLastArticle = currentPage * articlesPerPage;
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
-  const currentArticles = Array.isArray(articles) ? articles.slice(indexOfFirstArticle, indexOfLastArticle) : [];
+  const currentArticles = Array.isArray(articles)
+    ? articles.slice(indexOfFirstArticle, indexOfLastArticle)
+    : [];
   const totalPages = Math.ceil(articles.length / articlesPerPage);
 
   return (
-    <div className="bg-gray-100 md:bg-white min-h-screen relative">
-      <ViewModeSelector viewMode={viewMode} onViewModeChange={handleViewModeChange} userId={userId} />
+    <div className='bg-gray-100 md:bg-white min-h-screen relative'>
+      <ViewModeSelector
+        viewMode={viewMode}
+        onViewModeChange={handleViewModeChange}
+        userId={userId}
+      />
       <BlogList
         articles={currentArticles}
         currentPage={currentPage}

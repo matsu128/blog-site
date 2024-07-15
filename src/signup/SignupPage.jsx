@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Image from 'next/image';
 
 const SigninPage = () => {
+  useEffect(() => {
+    // Add the overflow-hidden class to the body
+    document.body.classList.add('overflow-hidden');
+
+    // Cleanup function to remove the class when the component unmounts
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, []);
+
   const router = useRouter();
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -48,14 +57,11 @@ const SigninPage = () => {
 
   return (
     <>
-      <Header />
       <div className='flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8'>
         <div className='sm:mx-auto sm:w-full sm:max-w-sm'>
-          <img
-            className='object-contain h-48 w-96'
-            src='/logo.jpg'
-            alt='Your Company'
-          />
+          <div className='flex justify-center'>
+            <Image src='/logo.jpg' alt='Logo' width={200} height={200} />
+          </div>
           <h2 className='mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900'>
             Sign up for an account
           </h2>
@@ -64,7 +70,9 @@ const SigninPage = () => {
         <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
           {/* Display error message */}
           {error && (
-            <div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative' role='alert'>
+            <div
+              className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative'
+              role='alert'>
               <strong className='font-bold'>Error!</strong>
               <span className='block sm:inline'> {error}</span>
             </div>
@@ -72,7 +80,9 @@ const SigninPage = () => {
 
           {/* Display success message */}
           {message && (
-            <div className='bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative' role='alert'>
+            <div
+              className='bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative'
+              role='alert'>
               <strong className='font-bold'>Success!</strong>
               <span className='block sm:inline'> {message}</span>
             </div>
@@ -80,7 +90,9 @@ const SigninPage = () => {
 
           <form onSubmit={handleSubmit} className='space-y-6'>
             <div className='mb-4'>
-              <label htmlFor='name' className='block text-sm font-medium leading-6 text-gray-900'>
+              <label
+                htmlFor='name'
+                className='block text-sm font-medium leading-6 text-gray-900'>
                 Name
               </label>
               <div className='mt-2'>
@@ -97,7 +109,9 @@ const SigninPage = () => {
               </div>
             </div>
             <div className='mb-4'>
-              <label htmlFor='email' className='block text-sm font-medium leading-6 text-gray-900'>
+              <label
+                htmlFor='email'
+                className='block text-sm font-medium leading-6 text-gray-900'>
                 Email
               </label>
               <div className='mt-2'>
@@ -114,7 +128,9 @@ const SigninPage = () => {
               </div>
             </div>
             <div className='mb-4'>
-              <label htmlFor='password' className='block text-sm font-medium leading-6 text-gray-900'>
+              <label
+                htmlFor='password'
+                className='block text-sm font-medium leading-6 text-gray-900'>
                 Password
               </label>
               <div className='mt-2'>
@@ -133,15 +149,13 @@ const SigninPage = () => {
             <div className='mt-4'>
               <button
                 type='submit'
-                className='w-full px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-              >
+                className='relative w-full mt-5 rounded-md bg-orange-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm overflow-hidden transition duration-300 transform hover:translate-y-[-0.2rem] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-600'>
                 Sign Up
               </button>
             </div>
           </form>
         </div>
       </div>
-      <Footer />
     </>
   );
 };
