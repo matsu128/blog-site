@@ -23,7 +23,7 @@ Database
 
 ## Overview
 
-This project is a blog site built with Next.js version 14. Backend processes are created in `pages/api`, and frontend processes are created in the `src` directory using React.
+This project is a blog site built with Next.js version 13. Backend processes are created in `pages/api`, and frontend processes are created in the `src` directory using React.
 
 ## Installation
 
